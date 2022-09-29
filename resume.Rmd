@@ -14,7 +14,12 @@ URL <- "https://github.com/JAHirsh/cv/blob/master/positions.csv"
 position_data <- read_csv( URL )
 head( position_data ) %>% pander()
 
+PDF_EXPORT <- FALSE
+print_section( position_data, section_id="education" )
 
+knitr::opts_chunk$set( results='asis', echo = FALSE )
+
+html_resume( "index.Rmd", css="resume", template=pkg_resource("html", "resume.html") )
 
 Aside
 ====================================
@@ -51,28 +56,33 @@ Arbitrary content.
 
 Education {data-icon=graduation-cap}
 ------------------------------------
+```r
+print_section( position_data, 'education' )
+```
 
 ### University One
 
-Arizona State University
+Title
 
-Tempe, AZ
+Location
 
-2020
+Year
 
-B.S. Public Service and Public Policy
+Arbitrary content
 
 ### University Two
 
-Arizona State University
+Title
 
-Tempe, AZ
+Location
 
-2023
+Year
 
-M.S. Program Evaluation and Data Analytics
+Arbitrary content
 
 
+Next Section
+------------
 ...
 
 ::: aside
