@@ -1,3 +1,4 @@
-"M.S., Program Evaluation and Data Analytics", Arizona State University, Tempe, May 2022, May 2023
-"B.S., Public Service and Public Policy, minor in Sustainability", Arizona State University, Tempe, June 2017, November 2020
-"Planning, Grants, and Allocations Manager", Jewish Federation of South Palm Beach County, Boca Raton Florida, July 2015, Current, "Manages annual grants and allocations process from request for proposal through program evaluation, Evaluates program performance, collects and analyzing data to measure impact and guide allocations, Supervises the Planning Department and seamlessly manages internal and cross-departmental streams of work flow, Analyzes demographic data for long-term planning projects"
+section,in_resume,title,institution,loc,start,end,description_1,description_2,description_3
+education,TRUE,"M.S., Program Evaluation and Data Analytics", Arizona State University,"Tempe, AZ",2022,2023,NA,NA,NA
+education, TRUE, "B.S., Public Service and Public Policy", Arizona State University, "Tempe, Az",2017,2020, NA, NA, NA
+research_positions, "Planning, Grants, and Allocations Manager", Jewish Federation of South Palm Beach County, "Boca Raton, Florida", 2015, Current, "Manages annual grants and allocations process from request for proposal through program evaluation, Evaluates program performance, collects and analyzing data to measure impact and guide allocations, Supervises the Planning Department and seamlessly manages internal and cross-departmental streams of work flow, Analyzes demographic data for long-term planning projects"
