@@ -2,8 +2,7 @@
 title: Jessica Hirsh's Resume"
 author: Jessica Hirsh
 date: "`r Sys.Date()`"
-output:
-  pagedown::html_resume
+output: pagedown::html_resume
   
 library( pagedown )
 library( glue )
@@ -18,8 +17,11 @@ PDF_EXPORT <- FALSE
 print_section( position_data, section_id="education" )
 
 knitr::opts_chunk$set( results='asis', echo = FALSE )
-
 html_resume( "index.Rmd", css="resume", template=pkg_resource("html", "resume.html") )
+library( pagedown )
+# setwd( "...directory where file lives..." )
+html_resume( "index.Rmd", css="resume", template=pkg_resource("html", "resume.html") )
+position_data <- read_csv( 'positions.csv' )
 
 Aside
 ====================================
