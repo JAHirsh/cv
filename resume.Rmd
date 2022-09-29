@@ -10,6 +10,11 @@ library( glue )
 library( tidyverse )
 library( pander )  
 
+URL <- "https://github.com/JAHirsh/cv/blob/master/positions.csv"
+position_data <- read_csv( URL )
+head( position_data ) %>% pander()
+
+
 
 Aside
 ====================================
