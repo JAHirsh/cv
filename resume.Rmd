@@ -4,6 +4,11 @@ author: Jessica Hirsh
 date: "`r Sys.Date()`"
 output:
   pagedown::html_resume
+  
+library( pagedown )
+library( glue )
+library( tidyverse )
+library( pander )  
 
 
 Aside
