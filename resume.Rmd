@@ -1,92 +1,141 @@
 ---
-title: Jessica Hirsh's Resume"
-author: Jessica Hirsh
+title: "Jessica Hirsh's Resume"
+author: "Jessica Hirsh"
 date: "`r Sys.Date()`"
-output: pagedown::html_resume
-  
-library( pagedown )
-library( glue )
-library( tidyverse )
-library( pander )  
+output:
+  pagedown::html_resume:
+    css: ['css/custom_resume.css', 'css/styles.css', 'resume']
+    self_contained: true
 
-URL <- "https://github.com/JAHirsh/cv/blob/master/positions.csv"
-position_data <- read_csv( URL )
-head( position_data ) %>% pander()
+---
 
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  results='asis', 
+  echo = FALSE
+)
+
+library(tidyverse)
+library(glue)
+
+# Set this to true to have links turned into footnotes at the end of the document
 PDF_EXPORT <- FALSE
-print_section( position_data, section_id="education" )
 
-knitr::opts_chunk$set( results='asis', echo = FALSE )
-html_resume( "index.Rmd", css="resume", template=pkg_resource("html", "resume.html") )
-library( pagedown )
-# setwd( "...directory where file lives..." )
-html_resume( "index.Rmd", css="resume", template=pkg_resource("html", "resume.html") )
-position_data <- read_csv( 'positions.csv' )
+# Holds all the links that were inserted for placement at the end
+links <- c()
+
+source('parsing_functions.R')
+
+# First let's get the data, filtering to only the items tagged as
+# Resume items
+
+position_data <- read_csv('positions.csv') %>% 
+  filter(in_resume) %>% 
+  mutate(
+    # Build some custom sections by collapsing others
+    section = case_when(
+      section %in% c('research_positions', 'industry_positions') ~ 'positions', 
+      section %in% c('data_science_writings', 'by_me_press') ~ 'writings',
+      TRUE ~ section
+    )
+  ) 
+```
 
 Aside
-====================================
-
-Picture, etc.
-
-Contact info
-------------------------------------
-
-Email: Jessahirsh@gmail.com
-Phone: 561-558-4385
+================================================================================
 
 
-Skills
-------------------------------------
+![logo](download.png){width=75%}
 
-- Grant management
-- Program evaluation
-- Fundraising
+Contact {#contact}
+--------------------------------------------------------------------------------
 
-Disclaimer
-------------------------------------
 
-A footer in the sidebar.
+
+- <i class="fa fa-envelope"></i> jessahirsh@gmail.com
+- <i class="fa fa-twitter"></i> N/A
+- <i class="fa fa-github"></i> github.com/JAHirsh
+- <i class="fa fa-link"></i> N/A
+- <i class="fa fa-phone"></i> (561) 558-4385
+
+
+
+Industry Skills {#skills}
+--------------------------------------------------------------------------------
+
+
+```{r}
+
+skills <- tribble(
+  ~skill,               ~level,
+  "R",                   4,   
+  "Community outreach",  5,
+  "Grant management",    5,
+  "Data analysis",       4,
+  "Strategic planning",  5,
+  "Data visualization",  3
+#  "AWK",                1
+)
+
+build_skill_bars(skills)
+```
+
+
+
+Open Source Contributions {#open-source}
+--------------------------------------------------------------------------------
+
+All projects available at `github.com/JAHirsh/<name>`
+
+
+- `Monty Hall`: R simulation
+
+
+
+
+Disclaimer {#disclaimer}
+--------------------------------------------------------------------------------
+
+Made w/ [**pagedown**](https://github.com/rstudio/pagedown). 
+
+Source code: [github.com/JAHirsh/cv](https://github.com/JAHirsh/cv).
+
+Last updated on `r Sys.Date()`.
+
+
 
 
 Main
-====================================
+================================================================================
 
-Your Name {#title}
-------------------------------------
+Jessica Hirsh {#title}
+--------------------------------------------------------------------------------
 
-Arbitrary content.
+```{r}
 
-Education {data-icon=graduation-cap}
-------------------------------------
-```r
-print_section( position_data, 'education' )
+intro_text <- "Nonprofit professional with grant management and fundraising experience (https://www.jewishboca.org)."
+
+# intro_text <- "I have made [visualizations viewed by hundreds of thousands of people](https://www.nytimes.com/interactive/2016/08/26/us/college-student-migration.html), [sped up query times for 25 terabytes of data by an average of 4,800 times](https://livefreeordichotomize.com/2019/06/04/using_awk_and_r_to_parse_25tb/), and built [packages for R](https://github.com/nstrayer/shinysense) that let you [do magic](http://nickstrayer.me/dataDayTexas/).
+# Currently searching for a data science position that allows me to build tools using visualization and machine learning to help people explore and understand their data."
+
+cat(sanitize_links(intro_text))
+
 ```
 
-### University One
-
-Title
-
-Location
-
-Year
-
-Arbitrary content
-
-### University Two
-
-Title
-
-Location
-
-Year
-
-Arbitrary content
 
 
-Next Section
-------------
-...
+Education {data-icon=graduation-cap data-concise=true}
+--------------------------------------------------------------------------------
 
-::: aside
-Arbitrary content.
-:::
+```{r}
+position_data %>% print_section('education')
+```
+
+
+
+Selected Positions {data-icon=suitcase}
+--------------------------------------------------------------------------------
+
+```{r}
+position_data %>% print_section('positions')
